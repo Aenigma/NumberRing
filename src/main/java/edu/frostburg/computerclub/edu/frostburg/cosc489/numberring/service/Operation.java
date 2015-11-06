@@ -43,6 +43,14 @@ class Operation {
         return new Operation(operation, operand);
     }
 
+    public OperationType getOperation() {
+        return operation;
+    }
+
+    public int getOperand() {
+        return operand;
+    }
+
     @Override
     public String toString() {
         return "Operation{" + "operation=" + operation + ", operand=" + operand

@@ -74,20 +74,22 @@ public final class Instructions {
         return new Instructions(initialData, operations);
     }
 
+    List<Integer> getInitializeData() {
+        return initializeData;
+    }
+
+    /**
+     *
+     * @return operations list
+     */
+    List<Operation> getOperations() {
+        return operations;
+    }
+
     @Override
     public String toString() {
         return "Instructions{" + "initializeData=" + initializeData
                 + ", operations=" + operations + '}';
     }
 
-    public static void main(String... args) throws IOException {
-        Path input
-                = Paths.get("../")
-                .toAbsolutePath()
-                .normalize()
-                .resolve("COSC489_PT_2158_Input.txt");
-
-        Instructions readFile = Instructions.readFile(input);
-        System.out.println(readFile);
-    }
 }
