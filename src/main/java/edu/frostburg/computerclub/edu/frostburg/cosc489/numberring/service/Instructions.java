@@ -25,14 +25,15 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
+ * Represents all the instructions to perform on a ring
  *
  * @author Kevin Raoofi
  */
-public class Instructions {
+public final class Instructions {
 
-    List<Integer> initializeData;
+    private final List<Integer> initializeData;
 
-    List<Operation> operations;
+    private final List<Operation> operations;
 
     private Instructions(List<Integer> initializeData,
             List<Operation> operations) {
@@ -46,10 +47,18 @@ public class Instructions {
     private static final Pattern OPERATION_PATTERN = Pattern.compile(
             "^\\w+\\s*(?:\\d+)?$");
 
+    /**
+     * Instructions method for an Instructions object; constructed by reading in
+     * the file
+     *
+     * @param p path to the file to be read
+     * @return instructions in file
+     * @throws IOException if file cannot be read
+     */
     public static Instructions readFile(Path p) throws IOException {
-        List<String> lines = Files.readAllLines(p);
+        final List<String> lines = Files.readAllLines(p);
 
-        List<Integer> initialData = Arrays.stream(lines.stream()
+        final List<Integer> initialData = Arrays.stream(lines.stream()
                 .filter(INIT_PATTERN.asPredicate())
                 .findAny()
                 .map(s -> s.split("\\s"))
@@ -57,7 +66,7 @@ public class Instructions {
                 .map(s -> Integer.parseInt(s))
                 .collect(Collectors.toList());
 
-        List<Operation> operations = lines.stream()
+        final List<Operation> operations = lines.stream()
                 .filter(OPERATION_PATTERN.asPredicate())
                 .map(Operation::readOperation)
                 .collect(Collectors.toList());
